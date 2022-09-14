@@ -1,4 +1,4 @@
-
+package Calculadora;
 import javax.swing.JOptionPane;
 
 /*
@@ -159,7 +159,6 @@ public class Jsp extends javax.swing.JFrame {
         int n = Integer.parseInt(cajaT.getText());
         int[][] matriz1;
         int[][] matriz2;
-        String s = null;
         matriz1 = new int[n][n];
         matriz2 = new int[n][n];
         //llenar las matrices
@@ -186,7 +185,7 @@ public class Jsp extends javax.swing.JFrame {
             }
         }
 
-        System.out.println("\t1\t\t2\t\tSuma");
+        System.out.println("\tMatriz1\t\tMatriz2\t\tMatrizSuma");
         for (int x = 0; x < 62; x++) {
             System.out.print("_");
         }
@@ -198,6 +197,7 @@ public class Jsp extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, matriz1[y][x]);
             }
             System.out.print(" | ");
+            //Imprimir matriz por ventana
             /*for (int i = 0; i < matriz1.length; i++) {
                 for (int j = 0; j < matriz1.length; j++) {
                     s += matriz1[i][j];
@@ -211,44 +211,27 @@ public class Jsp extends javax.swing.JFrame {
                 System.out.printf("%5d ", matriz2[y][x]);
             }
             System.out.print(" | ");
-            /*
-            for (int i = 0; i < matriz2.length; i++) {
-                for (int j = 0; j < matriz2.length; j++) {
-                    s += matriz2[i][j];
-                    s += "";
-                }
-                s += "\n";
-                JOptionPane.showMessageDialog(null, s);
-            }
-            */
+           
             for (int x = 0; x < matrizSuma[y].length; x++) {
                 System.out.printf("%5d ", matrizSuma[y][x]);
             }
             System.out.print(" | ");
             System.out.println();
         }
-        /*
-            for (int i = 0; i < matrizSuma.length; i++) {
-                for (int j = 0; j < matrizSuma.length; j++) {
-                    s += matriz1[i][j];
-                    s += "";
-                }
-                s += "\n";
-                JOptionPane.showMessageDialog(null, s);
-        }
-*/
+        
+
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnsumaActionPerformed
 
     private void BtntrazaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtntrazaActionPerformed
         int n = Integer.parseInt(cajaT.getText());
-        int[][] matriz;
+        int matriz[][];
 
         matriz = new int[n][n];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                System.out.println("Matriz1 [" + i + "}[" + j + "]. ");
-                matriz[i][j] = Integer.parseInt(JOptionPane.showInputDialog(null, "Matriz1 [" + i + "}[" + j + "]. " + matriz[i][j]));
+                System.out.println("Matriz [" + i + "}[" + j + "]. ");
+                matriz[i][j] = Integer.parseInt(JOptionPane.showInputDialog(null, "Matriz [" + i + "}[" + j + "]. " + matriz[i][j]));
             }
         }
         for (int i = 0; i < matriz.length; i++) {
@@ -258,12 +241,12 @@ public class Jsp extends javax.swing.JFrame {
         }
         imprimir(matriz);
         //valores diagonal
-        System.out.println("Valores diagonal");
+        System.out.println("Traza");
         for (int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz[0].length; j++) {
                 if (i == j) {
                     System.out.printf("%5d ", matriz[i][j]);
-                    cajaR.setText(String.valueOf("La diagonal de la Matriz son:  \t" + matriz[i][j]));
+                    cajaR.setText(String.valueOf("Traza de la Matriz son:  \t" + matriz[i][j]));
                 }
             }
         }
@@ -283,13 +266,14 @@ public class Jsp extends javax.swing.JFrame {
     }//GEN-LAST:event_cajaTActionPerformed
 
     private void BtnrestaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnrestaMouseClicked
+        /*
         int n, n1, n2;
         n = Integer.parseInt(cajaT.getText());
         n1 = Integer.parseInt(cajaT.getText());
         n2 = Integer.parseInt(cajaT.getText());
 
         int t = n1 + n2;
-
+*/
 
     }//GEN-LAST:event_BtnrestaMouseClicked
 
@@ -321,14 +305,14 @@ public class Jsp extends javax.swing.JFrame {
                 matrizresta[y][x] = resta;
             }
         }
-        //titulo
-        cajaR.setText(String.valueOf("\t1\t\t\t2\t\tResta"));
+        
+        cajaR.setText(String.valueOf("\tMatriz1\t\tMatriz2\t\tMatrizResta"));
         System.out.println("\t1\t\t2\tResta");
         for (int x = 0; x < 62; x++) {
             System.out.print("_");
         }
         System.out.println();
-        //imprimir 
+        
         for (int y = 0; y < matriz1.length; y++) {
             for (int x = 0; x < matriz1[y].length; x++) {
                 // cajaR.setText(String.valueOf("%5d ", matriz1[y][x]));
@@ -366,11 +350,11 @@ public class Jsp extends javax.swing.JFrame {
                 matriz[i][j] = Integer.parseInt(JOptionPane.showInputDialog(null, "Matriz [" + i + "}[" + j + "]. " + matriz[i][j]));
             }
         }
-        System.out.println("La determinante de la Matriz es:\t" + determinanteMatriz(matriz, n));
-        cajaR.setText(String.valueOf("La determinante de la Matriz es:  \t" + determinanteMatriz(matriz, n)));
+        System.out.println("La determinante de la Matriz es:\t" + determinante(matriz, n));
+        cajaR.setText(String.valueOf("La determinante de la Matriz es:  \t" + determinante(matriz, n)));
     }
 
-    static void obtenerCofactor(int matriz[][], int temp[][], int p, int q, int n) {
+    static void Cofactor(int matriz[][], int temp[][], int p, int q, int n) {
         int i = 0, j = 0;
         for (int fila = 0; fila < n; fila++) {
             for (int columna = 0; columna < n; columna++) {
@@ -385,7 +369,7 @@ public class Jsp extends javax.swing.JFrame {
         }
     }
 
-    static int determinanteMatriz(int[][] matriz, int n) {
+    static int determinante(int[][] matriz, int n) {
         int determinante = 0;
         if (n == 1) {
             return matriz[0][0];
@@ -393,8 +377,8 @@ public class Jsp extends javax.swing.JFrame {
         int temp[][] = new int[n][n];
         int multiplicador = 1;
         for (int f = 0; f < n; f++) {
-            obtenerCofactor(matriz, temp, 0, f, n);
-            determinante += multiplicador * matriz[0][f] * determinanteMatriz(temp, n - 1);
+            Cofactor(matriz, temp, 0, f, n);
+            determinante += multiplicador * matriz[0][f] * determinante(temp, n - 1);
             multiplicador = -multiplicador;
         }
         return determinante;
